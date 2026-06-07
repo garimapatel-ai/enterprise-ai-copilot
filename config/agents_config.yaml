@@ -1,0 +1,74 @@
+orchestrator:
+  model: gpt-4o
+  max_iterations: 10
+  memory_window: 20
+  routing_strategy: task_based  # task_based, round_robin, load_balanced
+
+agents:
+  code:
+    model: gpt-4o
+    fallback: llama-3-70b
+    max_tokens: 4096
+    temperature: 0.1
+    tools: [code_executor, syntax_checker, test_runner]
+  data:
+    model: gpt-4o
+    fallback: claude-3-5-sonnet
+    max_tokens: 2048
+    temperature: 0.1
+    tools: [dataframe_analyzer, chart_generator, stats_calculator]
+  document:
+    model: claude-3-5-sonnet
+    fallback: gpt-4o
+    max_tokens: 4096
+    temperature: 0.3
+    tools: [template_engine, spell_checker, compliance_checker]
+  research:
+    model: gpt-4o
+    fallback: claude-3-5-sonnet
+    max_tokens: 2048
+    temperature: 0.1
+    tools: [web_search, kb_retriever, citation_formatter]
+
+rag:
+  chunk_size: 512
+  chunk_overlap: 64
+  chunking_strategy: semantic
+  embedding_model: text-embedding-3-large
+  vector_db: pinecone
+  top_k_retrieval: 20
+  top_n_rerank: 5
+  rrf_k: 60
+
+llm_models:
+  gpt-4o:
+    provider: openai
+    context_window: 128000
+    cost_per_1k_tokens: 0.005
+  claude-3-5-sonnet:
+    provider: anthropic
+    context_window: 200000
+    cost_per_1k_tokens: 0.003
+  llama-3-70b:
+    provider: self_hosted
+    context_window: 8192
+    cost_per_1k_tokens: 0.0008
+  mistral-7b:
+    provider: self_hosted
+    context_window: 32768
+    cost_per_1k_tokens: 0.0002
+
+guardrails:
+  enable_safety_check: true
+  enable_hallucination_detection: true
+  enable_ragas_eval: true
+  hallucination_threshold: 0.3
+  pii_detection: true
+  rbac: true
+
+api:
+  host: 0.0.0.0
+  port: 8000
+  workers: 4
+  rate_limit_per_minute: 100
+  jwt_expiry_hours: 24
