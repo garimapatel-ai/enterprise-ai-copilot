@@ -145,6 +145,29 @@ enterprise-ai-copilot/
 └── README.md
 ```
 
+## 🖼️ Visualizations
+
+### RAG Pipeline — Evaluation Metrics
+> RAGAS scores across models and retrieval strategies (dense vs sparse vs hybrid + reranking)
+
+![RAG Metrics](assets/rag_metrics.png)
+
+---
+
+### Agent Performance & LLM Routing
+> Task success rates per agent and LLM usage distribution across 10K+ requests
+
+![Agent Performance](assets/agent_performance.png)
+
+---
+
+### System Overview — Latency & Hallucination Trends
+> Response latency distribution and hallucination rate improving over 12 weeks in production
+
+![System Overview](assets/system_overview.png)
+
+---
+
 ## 📊 Results
 
 | Metric | Value |
